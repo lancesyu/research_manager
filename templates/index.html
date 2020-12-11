@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Research Manager</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+    <h style="text-align: center">Notecards</h>
+    {% if notecards|length < 1 %}
+    <h4 style="text-align: center">There are no notecards. Make one!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
+        {% for notecard in notecards %}
+        <tr>
+            <td>{{notecard.title}}</td>
+            <td>{{notecard.content}}</td>
+            <td>
+                <a href="/delete/{{notecard.id}}">Delete</a>
+                <br>
+                <a href="/update/{{notecard.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <br>
+        <br>
+    </table>
+    {% endif %}
+    <form action="/" method="POST">
+        <label for="title">Notecard title:</label><br>
+        <input type="text" name="title" id="title">
+        <br>
+        <br>
+        <label for="content">Notecard content:</label><br>
+        <textarea name="content" cols="40" rows="5" id="content"></textarea>
+        <input type="submit" value="Add Notecard">
+    </form>
+</div>
+{% endblock %}

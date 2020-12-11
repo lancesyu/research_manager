@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Research Manager</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+    <h>Notecards</h>
+    
+    <form action="/update/{{notecard_to_update.id}}" method="POST">
+        <input type="text" name="title" id="title" value={{notecard_to_update.title}}>
+        <textarea name="content" cols="40" rows="5" id="content">{{notecard_to_update.content}}</textarea>
+
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}
