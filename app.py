@@ -9,6 +9,7 @@ class Notecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50),nullable=False)
     content = db.Column(db.String(1000),nullable=False)
+    tag = db.Column(db.String(20),nullable=False)
 
 def __repr__(self):
     return '<Notecard %r>' %self.id
@@ -18,7 +19,8 @@ def index():
     if request.method == 'POST':
         notecard_title = request.form['title']
         notecard_content = request.form['content']
-        new_notecard = Notecard(title=notecard_title,content=notecard_content)
+        notecard_tag = request.form['tag']
+        new_notecard = Notecard(title=notecard_title,content=notecard_content,tag=notecard_tag)
         try:
             db.session.add(new_notecard)
             db.session.commit()
@@ -46,6 +48,7 @@ def update(id):
     if request.method == 'POST':
         notecard_to_update.title = request.form['title']
         notecard_to_update.content = request.form['content']
+        notecard_to_update.tag = request.form['tag']
         try:
             db.session.commit()
             return redirect('/')

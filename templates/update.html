@@ -9,7 +9,7 @@
     <form action="/update/{{notecard_to_update.id}}" method="POST">
         <input type="text" name="title" id="title" value={{notecard_to_update.title}}>
         <textarea name="content" cols="40" rows="5" id="content">{{notecard_to_update.content}}</textarea>
-
+        <input type="text" name="tag" id="tag" value={{notecard_to_update.tag}}>
         <input type="submit" value="Update">
     </form>
 </div>

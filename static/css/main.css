@@ -1,9 +1,7 @@
-.header {
-    text-align: center;
-}
-body, html {
+html {
     margin: 0;
-    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(181, 215, 243);
 }
 
 .content {
@@ -33,11 +31,6 @@ td {
     margin-top: 20px;
 }
 
-#title{
-    width: 70%
-}
-
 #content {
     width: 70%;
-    height: 200px;
 }

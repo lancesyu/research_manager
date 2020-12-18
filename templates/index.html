@@ -4,20 +4,22 @@
 {% endblock %}
 {% block body %}
 <div class="content">
-    <h style="text-align: center">Notecards</h>
+    <h1>Notecards</h1>
     {% if notecards|length < 1 %}
-    <h4 style="text-align: center">There are no notecards. Make one!</h4>
+    <h4>There are no notecards. Make one!</h4>
     {% else %}
     <table>
         <tr>
             <th>Title</th>
             <th>Content</th>
+            <th>Tag</th>
             <th>Actions</th>
         </tr>
         {% for notecard in notecards %}
         <tr>
             <td>{{notecard.title}}</td>
             <td>{{notecard.content}}</td>
+            <td>{{notecard.tag}}</td>
             <td>
                 <a href="/delete/{{notecard.id}}">Delete</a>
                 <br>
@@ -30,13 +32,22 @@
     </table>
     {% endif %}
     <form action="/" method="POST">
-        <label for="title">Notecard title:</label><br>
+        <br>
+        <br>
+        <h3>Add a new notecard:</h3>
+        <label for="title">Notecard title:</label>
+        <br>
         <input type="text" name="title" id="title">
         <br>
         <br>
         <label for="content">Notecard content:</label><br>
         <textarea name="content" cols="40" rows="5" id="content"></textarea>
+        <br>
+        <label for="tag">Tag:</label>
+        <input type="text" name="tag" id="tag" value="untagged">
         <input type="submit" value="Add Notecard">
     </form>
+    <br>
+    <br>
 </div>
 {% endblock %}
