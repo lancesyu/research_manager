@@ -16,7 +16,8 @@ def __repr__(self):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'POST':
+    
+    if request.method == 'POST' and "add" in request.form:
         notecard_title = request.form['title']
         notecard_content = request.form['content']
         notecard_tag = request.form['tag']
@@ -28,10 +29,10 @@ def index():
         except:
             return 'There was an issue adding the notecard'
     else:
-        notecards = Notecard.query.order_by(Notecard.title).all()
-
+        notecards = Notecard.query.order_by(Notecard.tag).all()
         return render_template('index.html', notecards=notecards)
-    
+
+
 @app.route('/delete/<int:id>')
 def delete(id):
     notecard_to_delete = Notecard.query.get_or_404(id)
@@ -44,18 +45,18 @@ def delete(id):
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
-    notecard_to_update = Notecard.query.get_or_404(id)
+    notecard = Notecard.query.get_or_404(id)
     if request.method == 'POST':
-        notecard_to_update.title = request.form['title']
-        notecard_to_update.content = request.form['content']
-        notecard_to_update.tag = request.form['tag']
+        notecard.title = request.form['title']
+        notecard.content = request.form['content']
+        notecard.tag = request.form['tag']
         try:
             db.session.commit()
             return redirect('/')
         except:
             return 'There was a problem updating the notecard'
     else:
-        return render_template('update.html',notecard_to_update = notecard_to_update)
+        return render_template('update.html',notecard_to_update = notecard)
 
 if __name__ == "__main__":
     app.run(debug=True)

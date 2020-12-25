@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
-{% block head %}
-<title>Research Manager</title>
+{% block title %} 
+<title>Research Paper Manager</title>
 {% endblock %}
-{% block body %}
+{% block head_notecards %}
+<h1>Notecards</h1>
+{% endblock %}
+{% block body_notecards %}
+<form action="/" method="POST">
+    <br>
+    <h3>Add a new notecard:</h3>
+    <label for="title">Notecard title:</label>
+    <br>
+    <input type="text" name="title" id="title">
+    <br>
+    <label for="content">Notecard content:</label><br>
+    <textarea name="content" id="content"></textarea>
+    <br>
+    <label for="tag">Tag:</label>
+    <input type="text" name="tag" id="tag" value="untagged">
+    <input type="submit" name = "add" value="Add Notecard">
+</form>
 <div class="content">
-    <h1>Notecards</h1>
     {% if notecards|length < 1 %}
     <h4>There are no notecards. Make one!</h4>
     {% else %}
@@ -20,10 +36,9 @@
             <td>{{notecard.title}}</td>
             <td>{{notecard.content}}</td>
             <td>{{notecard.tag}}</td>
-            <td>
-                <a href="/delete/{{notecard.id}}">Delete</a>
-                <br>
-                <a href="/update/{{notecard.id}}">Update</a>
+            <td style="text-align:center">
+                <a href="/delete/{{notecard.id}}">🗑️</a>
+                <a href="/update/{{notecard.id}}">✏️</a>
             </td>
         </tr>
         {% endfor %}
@@ -31,22 +46,7 @@
         <br>
     </table>
     {% endif %}
-    <form action="/" method="POST">
-        <br>
-        <br>
-        <h3>Add a new notecard:</h3>
-        <label for="title">Notecard title:</label>
-        <br>
-        <input type="text" name="title" id="title">
-        <br>
-        <br>
-        <label for="content">Notecard content:</label><br>
-        <textarea name="content" cols="40" rows="5" id="content"></textarea>
-        <br>
-        <label for="tag">Tag:</label>
-        <input type="text" name="tag" id="tag" value="untagged">
-        <input type="submit" value="Add Notecard">
-    </form>
+    
     <br>
     <br>
 </div>
