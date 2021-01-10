@@ -3,36 +3,36 @@
 {% block body_sources %}
 <div class="content">
     <h3>Edit source:</h3>
-    <form action="/up/{{source_to_update.id}}" method="POST">
+    <form action="/update_source/{{source_to_update.id}}" method="POST">
         <label for="author_first">Author (first name):</label>
-    <input type="text" name="author_first" id="author_first" value={{source_to_update.author_first}}>
+    <input type="text" name="author_first" id="author_first" value="{{source_to_update.author_first}}">
     <br>
     <label for="author_last">Author (last name):</label>
-    <input type="text" name="author_last" id="author_last" value={{source_to_update.author_last}}>
+    <input type="text" name="author_last" id="author_last" value="{{source_to_update.author_last}}">
     <br>
     <label for="title">Title:</label>
-    <input type="text" name="title" id="title" value={{source_to_update.title}}>
+    <input type="text" name="title" id="title" value="{{source_to_update.title}}">
     <br>
     <label for="container">Container:</label>
-    <input type="text" name="container" id="container" value={{source_to_update.container}}>
+    <input type="text" name="container" id="container" value="{{source_to_update.container}}"">
     <br>
     <label for="others">Other contributors:</label>
-    <input type="text" name="others" id="others" value={{source_to_update.others}}>
+    <input type="text" name="others" id="others" value="{{source_to_update.others}}">
     <br>
     <label for="version">Version:</label>
-    <input type="text" name="version" id="version" value={{source_to_update.version}}>
+    <input type="text" name="version" id="version" value="{{source_to_update.version}}">
     <br>
     <label for="number">Number:</label>
-    <input type="text" name="number" id="number" value={{source_to_update.number}}>
+    <input type="text" name="number" id="number" value="{{source_to_update.number}}">
     <br>
     <label for="publisher">Publisher:</label>
-    <input type="text" name="publisher" id="publisher" value={{source_to_update.publisher}}>
+    <input type="text" name="publisher" id="publisher" value="{{source_to_update.publisher}}">
     <br>
     <label for="date">Date:</label>
-    <input type="date" name="date" id="date" value={{source_to_update.date}}>
+    <input type="text" name="date" id="date" value="{{source_to_update.date}}">
     <label for="location">Location:</label>
-    <input type="text" name="location" id="location" value={{source_to_update.location}}>
-    <input type="submit" name = "add_source" value="Update">
+    <input type="text" name="location" id="location" value="{{source_to_update.location}}">
+    <input type="submit" value="Update">
     </form>
 </div>
 {% endblock %}
