@@ -14,11 +14,18 @@
     <input type="text" name="title" id="title">
     <br>
     <label for="content">Notecard content:</label><br>
-    <textarea name="content" id="content"></textarea>
+    <textarea name="content" id="content" rows=10 cols=50></textarea>
     <br>
     <label for="tag">Tag:</label>
     <input type="text" name="tag" id="tag" value="untagged">
-    <input type="submit" name = "add" value="Add Notecard">
+    <label for="source">Source:</label>
+    <select name="source" id="source">
+        {% for source in sources %}
+        <option>{{source.title}}</option>
+        {% endfor %}
+        <option>None</option>
+    </select>
+    <input type="submit" name = "add_notecard" value="Add Notecard">
 </form>
 <div class="content">
     {% if notecards|length < 1 %}
@@ -26,16 +33,18 @@
     {% else %}
     <table>
         <tr>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Tag</th>
-            <th>Actions</th>
+            <th width="15%">Title</th>
+            <th width="40%">Content</th>
+            <th width="10%">Tag</th>
+            <th width="18%">Source</th>
+            <th width="12%">Actions</th>
         </tr>
         {% for notecard in notecards %}
         <tr>
             <td>{{notecard.title}}</td>
             <td>{{notecard.content}}</td>
             <td>{{notecard.tag}}</td>
+            <td>{{notecard.source}}</td>
             <td style="text-align:center">
                 <a href="/delete/{{notecard.id}}">🗑️</a>
                 <a href="/update/{{notecard.id}}">✏️</a>
@@ -49,5 +58,102 @@
     
     <br>
     <br>
+</div>
+{% endblock %}
+{% block head_sources %}
+<h1>Sources</h1>
+<select name="format">
+    <option>MLA</option>
+    <option>Chicago</option>
+</select>
+{% endblock %}
+{% block body_sources %} 
+<form action="/" method="POST">
+    <br>
+    <h3>Add a new source:</h3>
+    <label for="kind">What kind of source?</label>
+    <select name="kind">
+        <option>Book</option>
+        <option>Other</option>
+    </select>
+    <br>
+    <label for="author_first">Author: First name:</label>
+    <input type="text" name="author_first" id="author_first" size="10">
+    <label for="author_last">Last name:</label>
+    <input type="text" name="author_last" id="author_last" size="10">
+    <br>
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title">
+    <br>
+    <label for="container">Container:</label>
+    <input type="text" name="container" id="container">
+    <br>
+    <label for="others">Other contributors:</label>
+    <input type="text" name="others" id="others">
+    <br>
+    <label for="version">Version:</label>
+    <input type="text" name="version" id="version" size="5">
+    <label for="number">Number:</label>
+    <input type="text" name="number" id="number" size="5">
+    <br>
+    <label for="publisher">Publisher:</label>
+    <input type="text" name="publisher" id="publisher">
+    <br>
+    <label for="date">Date:</label>
+    <input type="text" name="date" id="date">
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location">
+    <input type="submit" name = "add_source" value="Add Source">
+</form>
+<div class="content">
+    {% if sources|length < 1 %}
+    <h4>There are no sources. Add one!</h4>
+    {% else %}
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th width="88%">Citation</th>
+                <th width="12%">Actions</th>
+            </tr>
+            {% for source in sources %}
+                <tr>
+                    <td>
+                        {{source.author_first}},{{source.author_last}}.
+                        {% if source.kind == 'Book'%}
+                        <i>{{source.title}}.</i>
+                        {% else %}
+                        "{{source.title}}."
+                        {% endif %}
+                        {% if source.container | length > 0 %}
+                        <i>{{source.container}},</i> 
+                        {% endif %}
+                        {% if source.other_contributors | length > 0 %}
+                        {{source.other_contributors}},
+                        {% endif %}
+                        {% if source.version | length > 0 %}
+                        {{source.version}},
+                        {% endif %}
+                        {% if source.number | length > 0 %}
+                        {{source.number}}, 
+                        {% endif %}
+                        {% if source.publisher | length > 0 %}
+                        {{source.publisher}}, 
+                        {% endif %}
+                        {% if source.date | length > 0 %}
+                        {{source.date}}, 
+                        {% endif %}
+                        {% if source.location | length > 0 %}
+                        {{source.location}}.
+                        {% endif %}
+                    </td>
+                    <td style="text-align:center">
+                        <a href="/delete_source/{{source.id}}">🗑️</a>
+                        <a href="/update_source/{{source.id}}">✏️</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 </div>
 {% endblock %}
