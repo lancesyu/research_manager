@@ -1,0 +1,44 @@
+
+#tables{
+    width: 80%;
+    padding: 30px;
+    margin: 30px;
+}
+h1{
+    font-size:14pt;
+    font-family: "Verdana", sans-serif;
+}
+
+title
+{
+    font-size:12pt;
+    font-family: "Verdana", sans-serif;
+    margin: 30px;
+}
+body{
+    background-color: rgb(181, 215, 243);
+    font-size: 10pt;
+    font-family: "Verdana", sans-serif;
+    margin:20px;
+}
+table, td, th {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout:fixed;
+    
+}
+
+th {
+    height: 30px;
+    text-align: center;
+}
+
+td {
+    text-align: left;
+    padding: 5px;
+    overflow-wrap: break-word;
+}

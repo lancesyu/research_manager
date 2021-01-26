@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block title %} 
 <title>Research Paper Manager</title>
+<a href="/compact">Compact View</a>
 {% endblock %}
 {% block head_notecards %}
-<h1>Notecards</h1>
+<h3>Notecards</h3>
 {% endblock %}
 {% block body_notecards %}
 <form action="/" method="POST">
     <br>
-    <h3>Add a new notecard:</h3>
+    <h1>Add a new notecard:</h1>
     <label for="title">Notecard title:</label>
     <br>
     <input type="text" name="title" id="title">
@@ -61,16 +62,21 @@
 </div>
 {% endblock %}
 {% block head_sources %}
-<h1>Sources</h1>
-<select name="format">
-    <option>MLA</option>
-    <option>Chicago</option>
-</select>
+<h3>Sources</h3>
+<!--
+<form action="/" method="POST">
+    <select name="format">
+        <option>MLA</option>
+        <option>Chicago</option>
+    </select>
+    <input type="submit" name="citation_style" value="Set Style">
+</form>
+-->
 {% endblock %}
 {% block body_sources %} 
 <form action="/" method="POST">
     <br>
-    <h3>Add a new source:</h3>
+    <h1>Add a new source:</h1>
     <label for="kind">What kind of source?</label>
     <select name="kind">
         <option>Book</option>
@@ -88,8 +94,8 @@
     <label for="container">Container:</label>
     <input type="text" name="container" id="container">
     <br>
-    <label for="others">Other contributors:</label>
-    <input type="text" name="others" id="others">
+    <label for="other_contributors">Other contributors:</label>
+    <input type="text" name="other_contributors" id="other_contributors">
     <br>
     <label for="version">Version:</label>
     <input type="text" name="version" id="version" size="5">
@@ -119,33 +125,15 @@
             {% for source in sources %}
                 <tr>
                     <td>
-                        {{source.author_first}},{{source.author_last}}.
+                        {{source.citation_author}}
                         {% if source.kind == 'Book'%}
                         <i>{{source.title}}.</i>
                         {% else %}
                         "{{source.title}}."
                         {% endif %}
-                        {% if source.container | length > 0 %}
-                        <i>{{source.container}},</i> 
-                        {% endif %}
-                        {% if source.other_contributors | length > 0 %}
-                        {{source.other_contributors}},
-                        {% endif %}
-                        {% if source.version | length > 0 %}
-                        {{source.version}},
-                        {% endif %}
-                        {% if source.number | length > 0 %}
-                        {{source.number}}, 
-                        {% endif %}
-                        {% if source.publisher | length > 0 %}
-                        {{source.publisher}}, 
-                        {% endif %}
-                        {% if source.date | length > 0 %}
-                        {{source.date}}, 
-                        {% endif %}
-                        {% if source.location | length > 0 %}
-                        {{source.location}}.
-                        {% endif %}
+                        {%+ if source.container | length > 0 -%}
+                        <i>{{source.container}}</i> 
+                        {%- endif -%}{{source.citation_everything_else}}
                     </td>
                     <td style="text-align:center">
                         <a href="/delete_source/{{source.id}}">🗑️</a>
